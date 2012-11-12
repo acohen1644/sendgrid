@@ -1,0 +1,303 @@
+#!/usr/bin/env ruby
+require 'gli'
+#require 'sendgrid'
+require_relative './sg'
+#begin # XXX: Remove this begin/rescue before distributing your app
+#rescue LoadError
+#  STDERR.puts "In development, you need to use `bundle exec bin/todo` to run your app"
+#  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
+#  STDERR.puts "Feel free to remove this message from bin/todo now"
+#  exit 64
+#end
+
+include GLI::App
+
+program_desc 'Describe your application here'
+
+version Sendgrid::VERSION
+
+desc 'Describe some switch here'
+switch [:s,:switch]
+
+desc 'Describe some flag here'
+default_value 'the default'
+arg_name 'The name of the argument'
+flag [:f,:flagname]
+
+desc 'api_user'
+default_value 'default'
+arg_name 'api_user'
+flag [:u, :api_user]
+
+desc 'api_password'
+default_value 'default'
+arg_name 'api_password'
+flag [:p, :api_password]
+
+
+desc 'Create a Subuser'
+arg_name 'Describe arguments to customer_add here'
+command :customer_add do |c|
+  c.desc 'Describe a switch to customer_add'
+  c.switch :s
+
+  c.desc 'The subuser\'s new username'
+  c.default_value 'default'
+  c.arg_name 'username'
+  c.flag [:u, :username]
+
+  c.desc 'New password of subuser'
+  c.default_value 'default'
+  c.arg_name 'password'
+  c.flag [:p, :password]
+
+  c.desc 'Email address of new subuser'
+  c.default_value 'default@default.com'
+  c.arg_name 'email'
+  c.flag [:e, :email]
+
+  c.desc 'First name of new subuser'
+  c.default_value 'default'
+  c.arg_name 'first_name'
+  c.flag [:f, :first_name]
+
+  c.desc 'Last name of new subuser'
+  c.default_value 'default'
+  c.arg_name 'last_name'
+  c.flag [:l, :last_name]
+
+  c.desc 'Address of new subuser'
+  c.default_value 'default'
+  c.arg_name 'address'
+  c.flag [:a, :address]
+
+  c.desc 'City of new subuser'
+  c.default_value 'default'
+  c.arg_name 'city'
+  c.flag [:c, :city]
+
+  c.desc 'State of new subuser'
+  c.default_value 'default'
+  c.arg_name 'state'
+  c.flag [:t, :state]
+
+  c.desc 'Zip of new subuser'
+  c.default_value 'default'
+  c.arg_name 'zip'
+  c.flag [:z, :zip]
+
+  c.desc 'Country of new subuser'
+  c.default_value 'default'
+  c.arg_name 'country'
+  c.flag [:o, :country]
+
+  c.desc 'Phone number of new subuser'
+  c.default_value 'default'
+  c.arg_name 'phone'
+  c.flag [:h, :phone]
+
+  c.desc 'Website of new subuser'
+  c.default_value 'default'
+  c.arg_name 'website'
+  c.flag [:w, :website]
+
+  c.desc 'Company of new subuser'
+  c.default_value 'default'
+  c.arg_name 'company'
+  c.flag [:m, :company]
+
+  c.desc 'Mail domain of new subuser'
+  c.arg_name 'mail_domain'
+  c.flag [:d, :mail_domain]
+
+  c.action do |global_options,options,args|
+
+    sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+    begin
+      response = sg.customer_add(
+        username:         options[:username],
+        password:         options[:password],
+        confirm_password: options[:password],
+        email:            options[:email],
+        first_name:       options[:first_name],
+        last_name:        options[:last_name],
+        address:          options[:address],
+        city:             options[:city],
+        state:            options[:state],
+        zip:              options[:zip],
+        country:          options[:country],
+        phone:            options[:phone],
+        website:          options[:website],
+        company:          options[:company]);
+    rescue SGerror => sge
+      puts "Error:"
+
+      if (sge.messages.respond_to?(:each))
+        sge.messages.each {|msg| puts msg}
+      else
+        puts sge.messages;
+      end
+    end
+
+    puts response
+  end
+end
+
+
+
+desc 'Retrieve Subusers'
+arg_name 'Describe arguments to customer_profile here'
+command :customer_profile do |c|
+  c.desc 'Describe a switch to customer_profile'
+  c.switch :s
+
+  c.desc 'Search filter, subuser that is registered under you'
+  c.arg_name 'username'
+  c.flag [:u, :username]
+
+  c.desc 'Search filter, email address subuser was registered with'
+  c.arg_name 'email'
+  c.flag [:e, :email]
+
+  c.desc 'Search filter, whether or not the subuser is currently active'
+  c.arg_name 'active'
+  c.flag [:i, :active]
+
+  c.desc 'Search filter, first name of subuser'
+  c.arg_name 'first_name'
+  c.flag [:f, :first_name]
+
+  c.desc 'Search filter, last name of subuser'
+  c.arg_name 'last_name'
+  c.flag [:l, :last_name]
+
+  c.desc 'Search filter, address of subuser'
+  c.arg_name 'address'
+  c.flag [:a, :address]
+
+  c.desc 'Search filter, city of subuser'
+  c.arg_name 'city'
+  c.flag [:c, :city]
+
+  c.desc 'Search filter, state of subuser'
+  c.arg_name 'state'
+  c.flag [:t, :state]
+
+  c.desc 'Search filter, zipcode of subuser'
+  c.arg_name 'zip'
+  c.flag [:z, :zip]
+
+  c.desc 'Search filter, country of subuser'
+  c.arg_name 'country'
+  c.flag [:o, :country]
+
+  c.desc 'Search filter, phone number of subuser'
+  c.arg_name 'phone'
+  c.flag [:h, :phone]
+
+  c.desc 'Search filter, website of subuser'
+  c.arg_name 'website'
+  c.flag [:w, :website]
+
+  c.desc 'Search filter, company of subuser'
+  c.arg_name 'company'
+  c.flag [:m, :company]
+
+  c.action do |global_options,options,args|
+
+    sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+#    begin
+      response = sg.customer_profile(
+        username:         options[:username],
+        email:            options[:email],
+        active:           options[:active],
+        first_name:       options[:first_name],
+        last_name:        options[:last_name],
+        address:          options[:address],
+        city:             options[:city],
+        state:            options[:state],
+        zip:              options[:zip],
+        country:          options[:country],
+        phone:            options[:phone],
+        website:          options[:website],
+        company:          options[:company]);
+
+      # customer_profile() returns an array of Hashes, each of which
+      # decsribes a single customer.
+
+      sg.display_response(response);
+
+#    rescue SGerror => sge
+#      puts "Error:"
+#
+#      if (sge.messages.respond_to?(:each))
+#        sge.messages.each {|msg| puts msg}
+#      else
+#        puts sge.messages;
+#      end
+#    end
+#
+#    puts response
+  end
+end
+
+
+
+desc 'Describe command1 here'
+arg_name 'Describe arguments to command1 here'
+command :command1 do |c|
+  c.desc 'Describe a switch to command1'
+  c.switch :s
+
+  c.desc 'Describe a flag to command1'
+  c.default_value 'default'
+  c.flag :f
+  c.action do |global_options,options,args|
+
+    # Your command logic here
+     
+    # If you have any errors, just raise them
+    # raise "that command made no sense"
+
+    puts "command1 command ran"
+  end
+end
+
+desc 'Describe command2 here'
+arg_name 'Describe arguments to command2 here'
+command :command2 do |c|
+  c.action do |global_options,options,args|
+    puts "command2 command ran"
+  end
+end
+
+desc 'Describe command3 here'
+arg_name 'Describe arguments to command3 here'
+command :command3 do |c|
+  c.action do |global_options,options,args|
+    puts "command3 command ran"
+  end
+end
+
+pre do |global,command,options,args|
+  # Pre logic here
+  # Return true to proceed; false to abourt and not call the
+  # chosen command
+  # Use skips_pre before a command to skip this block
+  # on that command only
+  true
+end
+
+post do |global,command,options,args|
+  # Post logic here
+  # Use skips_post before a command to skip this
+  # block on that command only
+end
+
+on_error do |exception|
+  # Error logic here
+  # return false to skip default error handling
+  true
+end
+
+exit run(ARGV)

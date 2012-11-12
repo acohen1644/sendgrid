@@ -1,0 +1,5 @@
+= sendgrid
+
+Generate this with
+    sendgrid rdoc
+After you have described your command line interface
