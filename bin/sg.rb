@@ -75,6 +75,16 @@ class Sg
 
 
 
+# Returns a confirmation message.
+  def customer_enable(params)
+
+    validate_params(params);
+
+    response = call_sendgrid('customer.enable', @api_user, @api_key, params);
+  end
+
+
+
   def add_missing_params(params, *required_param_keys)
     required_param_keys.each do |required_param_key|
       if (params.has_key?(required_param_key) == false) then
@@ -90,6 +100,8 @@ class Sg
   def validate_params(params)
     params.each { |name, value|
       case name
+        when :user
+          validate_max_length(name, value, MAX_USERNAME_LEN);
         when :username
           validate_max_length(name, value, MAX_USERNAME_LEN);
         when :password
@@ -193,9 +205,13 @@ class Sg
 
 # Returns an array of strings
   def get_messages(response)
+
+    puts("DEBUG: response=#{response}");
     if (response.has_key?('result') && (response['result']['message'] == 'error'))
       # Either a single error message, or an array of error messages
       raise SGerror, response['result']['errors']['error'];
+    elsif (response.has_key?('error'))
+      raise SGerror, response['error']['message'], response['error']['code'];
     elsif (response.has_key?('users'))
       # A list of users
       response['users']['user']

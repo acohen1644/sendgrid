@@ -243,6 +243,29 @@ end
 
 
 
+desc 'Enable a subuser'
+arg_name 'Describe arguments to customer_enable here'
+command :customer_enable do |c|
+  c.desc 'Describe a switch to command1'
+  c.switch :s
+
+  c.desc 'User'
+  c.arg_name 'user'
+  c.flag [:u, :user]
+  c.action do |global_options,options,args|
+
+    sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+#    begin
+    response = sg.customer_enable(
+      user: options[:user]);
+
+    puts(response);
+
+  end
+end
+
+
+
 desc 'Describe command1 here'
 arg_name 'Describe arguments to command1 here'
 command :command1 do |c|
@@ -252,6 +275,7 @@ command :command1 do |c|
   c.desc 'Describe a flag to command1'
   c.default_value 'default'
   c.flag :f
+
   c.action do |global_options,options,args|
 
     # Your command logic here

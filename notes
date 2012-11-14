@@ -8,6 +8,9 @@ customer_add -u my_username8
 
 bundle exec bin/sendgrid -u EastBaySoftware -p g72XwFd5o customer_profile
 
+bundle exec bin/sendgrid -u EastBaySoftware -p g72XwFd5o \
+customer_enable -u my_username10
+
 The "customer_profile" invocation is almost working. I just need to
 handle (and display) the list of customers that comes back.
 
