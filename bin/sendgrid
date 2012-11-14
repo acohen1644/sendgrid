@@ -249,7 +249,7 @@ command :customer_enable do |c|
   c.desc 'Describe a switch to command1'
   c.switch :s
 
-  c.desc 'User'
+  c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
   c.action do |global_options,options,args|
