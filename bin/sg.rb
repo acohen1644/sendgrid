@@ -85,6 +85,16 @@ class Sg
 
 
 
+# Returns a confirmation message.
+  def customer_disable(params)
+
+    validate_params(params);
+
+    response = call_sendgrid('customer.disable', @api_user, @api_key, params);
+  end
+
+
+
   def add_missing_params(params, *required_param_keys)
     required_param_keys.each do |required_param_key|
       if (params.has_key?(required_param_key) == false) then

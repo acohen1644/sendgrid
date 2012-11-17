@@ -246,9 +246,6 @@ end
 desc 'Enable a subuser'
 arg_name 'Describe arguments to customer_enable here'
 command :customer_enable do |c|
-  c.desc 'Describe a switch to command1'
-  c.switch :s
-
   c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
@@ -257,6 +254,26 @@ command :customer_enable do |c|
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
 #    begin
     response = sg.customer_enable(
+      user: options[:user]);
+
+    puts(response);
+
+  end
+end
+
+
+
+desc 'Disable a subuser'
+arg_name 'Describe arguments to customer_disable here'
+command :customer_disable do |c|
+  c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
+  c.arg_name 'user'
+  c.flag [:u, :user]
+  c.action do |global_options,options,args|
+
+    sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+#    begin
+    response = sg.customer_disable(
       user: options[:user]);
 
     puts(response);
