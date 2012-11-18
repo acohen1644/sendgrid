@@ -146,9 +146,9 @@ end
 
 
 desc 'Retrieve Subusers'
-arg_name 'Describe arguments to customer_profile here'
-command :customer_profile do |c|
-  c.desc 'Describe a switch to customer_profile'
+arg_name 'Describe arguments to customer_profile_get here'
+command :customer_profile_get do |c|
+  c.desc 'Describe a switch to customer_profile_get'
   c.switch :s
 
   c.desc 'Search filter, subuser that is registered under you'
@@ -207,7 +207,7 @@ command :customer_profile do |c|
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
 #    begin
-      response = sg.customer_profile(
+      response = sg.customer_profile_get(
         username:         options[:username],
         email:            options[:email],
         active:           options[:active],
@@ -222,7 +222,7 @@ command :customer_profile do |c|
         website:          options[:website],
         company:          options[:company]);
 
-      # customer_profile() returns an array of Hashes, each of which
+      # customer_profile_get() returns an array of Hashes, each of which
       # decsribes a single customer.
 
       sg.display_response(response);

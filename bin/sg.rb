@@ -63,7 +63,7 @@ class Sg
 
 
 # Returns an array of Hashes, each of which desribes a single customer.
-  def customer_profile(params)
+  def customer_profile_get(params)
     # Remove any parameters whose value is nil.
     params.delete_if {|key, value| value == nil}
 
