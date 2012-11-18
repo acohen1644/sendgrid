@@ -95,6 +95,26 @@ class Sg
 
 
 
+# Returns a confirmation message.
+  def customer_website_enable(params)
+
+    validate_params(params);
+
+    response = call_sendgrid('customer.website_enable', @api_user, @api_key, params);
+  end
+
+
+
+# Returns a confirmation message.
+  def customer_website_disable(params)
+
+    validate_params(params);
+
+    response = call_sendgrid('customer.website_disable', @api_user, @api_key, params);
+  end
+
+
+
   def add_missing_params(params, *required_param_keys)
     required_param_keys.each do |required_param_key|
       if (params.has_key?(required_param_key) == false) then
