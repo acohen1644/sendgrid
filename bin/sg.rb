@@ -75,6 +75,31 @@ class Sg
 
 
 
+  def customer_profile_set(params)
+    # Remove any parameters whose value is nil.
+    params.delete_if {|key, value| value == nil}
+
+    # Add the "task" parameter, with its mandated value.
+    params[:task]=  "set";
+
+    params =
+      add_missing_params(
+        params,
+        :first_name,
+        :last_name,
+        :address,
+        :city,
+        :state,
+        :zip,
+        :country,
+        :phone,
+        :website)
+
+    response = call_sendgrid('customer.profile', @api_user, @api_key, params);
+  end
+
+
+
 # Returns a confirmation message.
   def customer_enable(params)
 

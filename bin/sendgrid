@@ -323,6 +323,90 @@ end
 
 
 
+desc 'Update Subuser'
+arg_name 'Describe arguments to customer_profile_set here'
+command :customer_profile_set do |c|
+  c.desc 'Describe a switch to customer_profile_get'
+  c.switch :s
+
+  c.desc 'Subuser that is registered under you'
+  c.arg_name 'username'
+  c.flag [:u, :username]
+
+  c.desc 'First name of subuser'
+  c.arg_name 'first_name'
+  c.flag [:f, :first_name]
+
+  c.desc 'Last name of subuser'
+  c.arg_name 'last_name'
+  c.flag [:l, :last_name]
+
+  c.desc 'Address of subuser'
+  c.arg_name 'address'
+  c.flag [:a, :address]
+
+  c.desc 'City of subuser'
+  c.arg_name 'city'
+  c.flag [:c, :city]
+
+  c.desc 'State of subuser'
+  c.arg_name 'state'
+  c.flag [:t, :state]
+
+  c.desc 'Zipcode of subuser'
+  c.arg_name 'zip'
+  c.flag [:z, :zip]
+
+  c.desc 'Country of subuser'
+  c.arg_name 'country'
+  c.flag [:o, :country]
+
+  c.desc 'Phone number of subuser'
+  c.arg_name 'phone'
+  c.flag [:h, :phone]
+
+  c.desc 'Website of subuser'
+  c.arg_name 'website'
+  c.flag [:w, :website]
+
+  c.desc 'Company of subuser'
+  c.arg_name 'company'
+  c.flag [:m, :company]
+
+  c.action do |global_options,options,args|
+
+    sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+    begin
+      response = sg.customer_profile_set(
+        username:         options[:username],
+        email:            options[:email],
+        active:           options[:active],
+        first_name:       options[:first_name],
+        last_name:        options[:last_name],
+        address:          options[:address],
+        city:             options[:city],
+        state:            options[:state],
+        zip:              options[:zip],
+        country:          options[:country],
+        phone:            options[:phone],
+        website:          options[:website],
+        company:          options[:company]);
+    rescue SGerror => sge
+      puts "Error:"
+
+      if (sge.messages.respond_to?(:each))
+        sge.messages.each {|msg| puts msg}
+      else
+        puts sge.messages;
+      end
+    end
+
+    puts response
+  end
+end
+
+
+
 desc 'Describe command1 here'
 arg_name 'Describe arguments to command1 here'
 command :command1 do |c|

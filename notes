@@ -12,9 +12,6 @@ customer_profile_get
 bundle exec bin/sendgrid -u EastBaySoftware -p g72XwFd5o \
 customer_enable -u my_username10
 
-The "customer_profile" invocation is almost working. I just need to
-handle (and display) the list of customers that comes back.
-
 There needs to be some sort
 of defaulting mechanism (~/.sendgridrc, maybe?), because there are so
 many parameters. Currently, everything just defaults to "default".
@@ -24,3 +21,10 @@ We'll need to handle that.
 
 This is Asher's api_user and api_password:
 'EastBaySoftware', 'g72XwFd5o'
+
+
+It really looks like customer_profile_set requires a value for every
+single parameter, even though the docs say otherwise. Construct a
+URL which which reproduces the error, and open a call with Sendgrid
+support. If it's really true (I think it is), finish customer_profile_set
+by forcing default values for any missing params.
