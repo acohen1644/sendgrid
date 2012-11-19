@@ -100,6 +100,13 @@ class Sg
 
 
 
+  def customer_password(params)
+    validate_params(params);
+    response = call_sendgrid('customer.password', @api_user, @api_key, params);
+  end
+
+
+
 # Returns a confirmation message.
   def customer_enable(params)
 

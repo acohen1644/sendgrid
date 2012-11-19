@@ -407,6 +407,44 @@ end
 
 
 
+desc 'Update Subuser Password'
+arg_name 'Describe arguments to customer_password here'
+command :customer_password do |c|
+  c.desc 'Describe a switch to customer_password'
+  c.switch :s
+
+  c.desc 'Subuser that is registered under you'
+  c.arg_name 'username'
+  c.flag [:u, :user]
+
+  c.desc 'New password of subuser'
+  c.arg_name 'password'
+  c.flag [:p, :password]
+
+  c.action do |global_options,options,args|
+
+    sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+    begin
+      response = sg.customer_password(
+        user:             options[:user],
+        password:         options[:password],
+        confirm_password: options[:password]);
+    rescue SGerror => sge
+      puts "Error:"
+
+      if (sge.messages.respond_to?(:each))
+        sge.messages.each {|msg| puts msg}
+      else
+        puts sge.messages;
+      end
+    end
+
+    puts response
+  end
+end
+
+
+
 desc 'Describe command1 here'
 arg_name 'Describe arguments to command1 here'
 command :command1 do |c|
