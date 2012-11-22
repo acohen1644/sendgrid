@@ -107,6 +107,13 @@ class Sg
 
 
 
+  def customer_username(params)
+    params[:task]= "setUsername";
+    response = call_sendgrid('customer.profile', @api_user, @api_key, params);
+  end
+
+
+
 # Returns a confirmation message.
   def customer_enable(params)
 

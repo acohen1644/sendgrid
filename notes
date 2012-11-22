@@ -22,9 +22,6 @@ We'll need to handle that.
 This is Asher's api_user and api_password:
 'EastBaySoftware', 'g72XwFd5o'
 
-
-It really looks like customer_profile_set requires a value for every
-single parameter, even though the docs say otherwise. Construct a
-URL which which reproduces the error, and open a call with Sendgrid
-support. If it's really true (I think it is), finish customer_profile_set
-by forcing default values for any missing params.
+Continue adding more methods. The next one is "Update Subuser Username".
+It will be interesting to figure out which name is an email name, and
+which is not.
