@@ -482,6 +482,43 @@ end
 
 
 
+desc 'Update Subuser Email Address'
+arg_name 'Describe arguments to customer_email here'
+command :customer_email do |c|
+  c.desc 'Describe a switch to customer_email'
+  c.switch :s
+
+  c.desc 'Subuser that is registered under you'
+  c.arg_name 'user'
+  c.flag [:u, :user]
+
+  c.desc 'New email address of subuser'
+  c.arg_name 'email'
+  c.flag [:e, :email]
+
+  c.action do |global_options,options,args|
+
+    sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+    begin
+      response = sg.customer_email(
+        user:             options[:user],
+        email:            options[:email]);
+    rescue SGerror => sge
+      puts "Error:"
+
+      if (sge.messages.respond_to?(:each))
+        sge.messages.each {|msg| puts msg}
+      else
+        puts sge.messages;
+      end
+    end
+
+    puts response
+  end
+end
+
+
+
 desc 'Describe command1 here'
 arg_name 'Describe arguments to command1 here'
 command :command1 do |c|

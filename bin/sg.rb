@@ -114,6 +114,13 @@ class Sg
 
 
 
+  def customer_email(params)
+    params[:task]= "setEmail";
+    response = call_sendgrid('customer.profile', @api_user, @api_key, params);
+  end
+
+
+
 # Returns a confirmation message.
   def customer_enable(params)
 
