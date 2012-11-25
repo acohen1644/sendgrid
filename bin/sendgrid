@@ -267,6 +267,32 @@ end
 
 
 
+desc 'Update Customer Subuser Event Notification URL'
+arg_name 'Describe arguments to customer_event_url_set here'
+command :customer_event_url_set do |c|
+  c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
+  c.arg_name 'user'
+  c.flag [:u, :user]
+
+  c.desc 'URL: the new event notification URL'
+  c.arg_name 'url'
+  c.flag [:r, :url]
+
+  c.action do |global_options,options,args|
+
+    sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+#    begin
+    response = sg.customer_event_url_set(
+      user: options[:user],
+      url:  options[:url]);
+
+    puts(response);
+
+  end
+end
+
+
+
 desc 'Disable a subuser'
 arg_name 'Describe arguments to customer_disable here'
 command :customer_disable do |c|
