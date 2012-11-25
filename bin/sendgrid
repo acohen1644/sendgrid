@@ -243,9 +243,9 @@ end
 
 
 
-desc 'Enable a subuser'
-arg_name 'Describe arguments to customer_enable here'
-command :customer_enable do |c|
+desc 'Retrieve Customer Subuser Event Notification URL'
+arg_name 'Describe arguments to customer_event_url_get here'
+command :customer_event_url_get do |c|
   c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
@@ -253,10 +253,14 @@ command :customer_enable do |c|
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
 #    begin
-    response = sg.customer_enable(
+    response = sg.customer_event_url_get(
       user: options[:user]);
 
-    puts(response);
+    if (response == nil)
+      puts("none");
+    else
+      puts(response);
+    end
 
   end
 end

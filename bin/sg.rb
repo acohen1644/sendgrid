@@ -161,6 +161,13 @@ class Sg
 
 
 
+  def customer_event_url_get(params)
+    params[:task]= "get";
+    response = call_sendgrid('customer.eventposturl', @api_user, @api_key, params);
+  end
+
+
+
   def add_missing_params(params, *required_param_keys)
     required_param_keys.each do |required_param_key|
       if (params.has_key?(required_param_key) == false) then
@@ -291,6 +298,9 @@ class Sg
     elsif (response.has_key?('users'))
       # A list of users
       response['users']['user']
+    elsif (response.has_key?('url'))
+      # A URL value
+      response['url']
     else
       # A success message.
       response['result']['message']
