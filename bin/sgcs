@@ -34,7 +34,6 @@ flag [:p, :api_password]
 
 
 desc 'Create a Subuser'
-arg_name 'Describe arguments to add here'
 command :add do |c|
   c.desc 'Describe a switch to add'
   c.switch :s
