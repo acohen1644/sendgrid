@@ -265,23 +265,26 @@ end
 
 
 desc 'Update Customer Subuser Event Notification URL'
-arg_name 'Describe arguments to event_url_set here'
+arg_name 'username url'
 command :event_url_set do |c|
-  c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
-  c.arg_name 'user'
-  c.flag [:u, :user]
-
-  c.desc 'URL: the new event notification URL'
-  c.arg_name 'url'
-  c.flag [:r, :url]
 
   c.action do |global_options,options,args|
+    if args.empty?
+      raise "The 'username' argument is required, and it must match" <<
+            " the 'username' value from a previous successful call" <<
+            " to 'add'."
+    end
+
+    if (args.length < 2)
+      raise "The 'url' argument is required, and it will be used as" <<
+            " the specified user's new event notification URL."
+    end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
 #    begin
     response = sg.customer_event_url_set(
-      user: options[:user],
-      url:  options[:url]);
+      user: args[0],
+      url:  args[1]);
 
     puts(response);
 
