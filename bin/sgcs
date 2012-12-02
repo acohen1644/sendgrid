@@ -239,17 +239,19 @@ end
 
 
 desc 'Retrieve Customer Subuser Event Notification URL'
-arg_name 'Describe arguments to event_url_get here'
+arg_name 'username'
 command :event_url_get do |c|
-  c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
-  c.arg_name 'user'
-  c.flag [:u, :user]
   c.action do |global_options,options,args|
+    if args.empty?
+      raise "The 'username' argument is required, and it must match" <<
+            " the 'username' value from a previous successful call" <<
+            " to 'add'."
+    end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
 #    begin
     response = sg.customer_event_url_get(
-      user: options[:user]);
+      user: args[0]);
 
     if (response == nil)
       puts("none");

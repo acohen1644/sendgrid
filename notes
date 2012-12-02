@@ -3,7 +3,7 @@ rvm use 1.9.3
 
 Testing by running these commands:
 
-bundle exec bin/sendgrid -u EastBay Software -p g72XwFd5o \
+bundle exec bin/sendgrid -u EastBaySoftware -p g72XwFd5o \
 customer_add -u my_username8
 
 bundle exec bin/sendgrid -u EastBaySoftware -p g72XwFd5o \
