@@ -361,17 +361,19 @@ end
 
 
 desc 'Disable Website Access To A Subuser'
-arg_name 'Describe arguments to website_disable here'
+arg_name 'username'
 command :website_disable do |c|
-  c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
-  c.arg_name 'user'
-  c.flag [:u, :user]
   c.action do |global_options,options,args|
+    if args.empty?
+      raise "The 'username' argument is required, and it must match" <<
+            " the 'username' value from a previous successful call" <<
+            " to 'add'."
+    end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
 #    begin
     response = sg.customer_website_disable(
-      user: options[:user]);
+      user: args[0]);
 
     puts(response);
 
