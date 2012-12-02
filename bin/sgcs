@@ -34,9 +34,9 @@ flag [:p, :api_password]
 
 
 desc 'Create a Subuser'
-arg_name 'Describe arguments to customer_add here'
-command :customer_add do |c|
-  c.desc 'Describe a switch to customer_add'
+arg_name 'Describe arguments to add here'
+command :add do |c|
+  c.desc 'Describe a switch to add'
   c.switch :s
 
   c.desc 'The subuser\'s new username'
@@ -144,9 +144,9 @@ end
 
 
 desc 'Retrieve Subusers'
-arg_name 'Describe arguments to customer_profile_get here'
-command :customer_profile_get do |c|
-  c.desc 'Describe a switch to customer_profile_get'
+arg_name 'Describe arguments to profile_get here'
+command :profile_get do |c|
+  c.desc 'Describe a switch to profile_get'
   c.switch :s
 
   c.desc 'Search filter, subuser that is registered under you'
@@ -242,8 +242,8 @@ end
 
 
 desc 'Retrieve Customer Subuser Event Notification URL'
-arg_name 'Describe arguments to customer_event_url_get here'
-command :customer_event_url_get do |c|
+arg_name 'Describe arguments to event_url_get here'
+command :event_url_get do |c|
   c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
@@ -266,8 +266,8 @@ end
 
 
 desc 'Update Customer Subuser Event Notification URL'
-arg_name 'Describe arguments to customer_event_url_set here'
-command :customer_event_url_set do |c|
+arg_name 'Describe arguments to event_url_set here'
+command :event_url_set do |c|
   c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
@@ -292,8 +292,8 @@ end
 
 
 desc 'Delete Customer Subuser Event Notification URL'
-arg_name 'Describe arguments to customer_event_url_delete here'
-command :customer_event_url_delete do |c|
+arg_name 'Describe arguments to event_url_delete here'
+command :event_url_delete do |c|
   c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
@@ -313,8 +313,8 @@ end
 
 
 desc 'Disable a subuser'
-arg_name 'Describe arguments to customer_disable here'
-command :customer_disable do |c|
+arg_name 'Describe arguments to disable here'
+command :disable do |c|
   c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
@@ -333,8 +333,8 @@ end
 
 
 desc 'Enable Website Access To A Subuser'
-arg_name 'Describe arguments to customer_website_enable here'
-command :customer_website_enable do |c|
+arg_name 'Describe arguments to website_enable here'
+command :website_enable do |c|
   c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
@@ -353,8 +353,8 @@ end
 
 
 desc 'Disable Website Access To A Subuser'
-arg_name 'Describe arguments to customer_website_disable here'
-command :customer_website_disable do |c|
+arg_name 'Describe arguments to website_disable here'
+command :website_disable do |c|
   c.desc 'User: must match the "username" value from a previous successful call to "customer.add"'
   c.arg_name 'user'
   c.flag [:u, :user]
@@ -373,9 +373,9 @@ end
 
 
 desc 'Update Subuser'
-arg_name 'Describe arguments to customer_profile_set here'
-command :customer_profile_set do |c|
-  c.desc 'Describe a switch to customer_profile_get'
+arg_name 'Describe arguments to profile_set here'
+command :profile_set do |c|
+  c.desc 'Describe a switch to profile_get'
   c.switch :s
 
   c.desc 'Subuser that is registered under you'
@@ -457,9 +457,9 @@ end
 
 
 desc 'Update Subuser Password'
-arg_name 'Describe arguments to customer_password here'
-command :customer_password do |c|
-  c.desc 'Describe a switch to customer_password'
+arg_name 'Describe arguments to password here'
+command :password do |c|
+  c.desc 'Describe a switch to password'
   c.switch :s
 
   c.desc 'Subuser that is registered under you'
@@ -495,9 +495,9 @@ end
 
 
 desc 'Update Subuser Username'
-arg_name 'Describe arguments to customer_username here'
-command :customer_username do |c|
-  c.desc 'Describe a switch to customer_username'
+arg_name 'Describe arguments to username here'
+command :username do |c|
+  c.desc 'Describe a switch to username'
   c.switch :s
 
   c.desc 'Subuser that is registered under you'
@@ -532,9 +532,9 @@ end
 
 
 desc 'Update Subuser Email Address'
-arg_name 'Describe arguments to customer_email here'
-command :customer_email do |c|
-  c.desc 'Describe a switch to customer_email'
+arg_name 'Describe arguments to email here'
+command :email do |c|
+  c.desc 'Describe a switch to email'
   c.switch :s
 
   c.desc 'Subuser that is registered under you'
