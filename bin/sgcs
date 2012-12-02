@@ -143,9 +143,7 @@ end
 
 
 desc 'Retrieve Subusers'
-arg_name 'Describe arguments to profile_get here'
 command :profile_get do |c|
-  c.desc 'Describe a switch to profile_get'
   c.switch :s
 
   c.desc 'Search filter, subuser that is registered under you'
