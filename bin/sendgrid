@@ -12,26 +12,24 @@ require_relative './sg'
 
 include GLI::App
 
-program_desc 'Describe your application here'
+program_desc 'Allows interactive use of the SendGrid customer-subuser API'
 
 version Sendgrid::VERSION
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+#desc 'Describe some switch here'
+#switch [:s,:switch]
 
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
+#desc 'Describe some flag here'
+#default_value 'the default'
+#arg_name 'The name of the argument'
+#flag [:f,:flagname]
 
-desc 'api_user'
-default_value 'default'
-arg_name 'api_user'
+desc 'SendGrid account username'
+arg_name 'username'
 flag [:u, :api_user]
 
-desc 'api_password'
-default_value 'default'
-arg_name 'api_password'
+desc 'SendGrid account password'
+arg_name 'password'
 flag [:p, :api_password]
 
 
@@ -570,62 +568,62 @@ end
 
 
 
-desc 'Describe command1 here'
-arg_name 'Describe arguments to command1 here'
-command :command1 do |c|
-  c.desc 'Describe a switch to command1'
-  c.switch :s
-
-  c.desc 'Describe a flag to command1'
-  c.default_value 'default'
-  c.flag :f
-
-  c.action do |global_options,options,args|
-
-    # Your command logic here
-     
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
-
-    puts "command1 command ran"
-  end
-end
-
-desc 'Describe command2 here'
-arg_name 'Describe arguments to command2 here'
-command :command2 do |c|
-  c.action do |global_options,options,args|
-    puts "command2 command ran"
-  end
-end
-
-desc 'Describe command3 here'
-arg_name 'Describe arguments to command3 here'
-command :command3 do |c|
-  c.action do |global_options,options,args|
-    puts "command3 command ran"
-  end
-end
-
-pre do |global,command,options,args|
-  # Pre logic here
-  # Return true to proceed; false to abourt and not call the
-  # chosen command
-  # Use skips_pre before a command to skip this block
-  # on that command only
-  true
-end
-
-post do |global,command,options,args|
-  # Post logic here
-  # Use skips_post before a command to skip this
-  # block on that command only
-end
-
-on_error do |exception|
-  # Error logic here
-  # return false to skip default error handling
-  true
-end
+#desc 'Describe command1 here'
+#arg_name 'Describe arguments to command1 here'
+#command :command1 do |c|
+#  c.desc 'Describe a switch to command1'
+#  c.switch :s
+#
+#  c.desc 'Describe a flag to command1'
+#  c.default_value 'default'
+#  c.flag :f
+#
+#  c.action do |global_options,options,args|
+#
+#    # Your command logic here
+#     
+#    # If you have any errors, just raise them
+#    # raise "that command made no sense"
+#
+#    puts "command1 command ran"
+#  end
+#end
+#
+#desc 'Describe command2 here'
+#arg_name 'Describe arguments to command2 here'
+#command :command2 do |c|
+#  c.action do |global_options,options,args|
+#    puts "command2 command ran"
+#  end
+#end
+#
+#desc 'Describe command3 here'
+#arg_name 'Describe arguments to command3 here'
+#command :command3 do |c|
+#  c.action do |global_options,options,args|
+#    puts "command3 command ran"
+#  end
+#end
+#
+#pre do |global,command,options,args|
+#  # Pre logic here
+#  # Return true to proceed; false to abourt and not call the
+#  # chosen command
+#  # Use skips_pre before a command to skip this block
+#  # on that command only
+#  true
+#end
+#
+#post do |global,command,options,args|
+#  # Post logic here
+#  # Use skips_post before a command to skip this
+#  # block on that command only
+#end
+#
+#on_error do |exception|
+#  # Error logic here
+#  # return false to skip default error handling
+#  true
+#end
 
 exit run(ARGV)
