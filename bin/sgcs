@@ -35,9 +35,6 @@ flag [:p, :api_password]
 
 desc 'Create a Subuser'
 command :add do |c|
-  c.desc 'Describe a switch to add'
-  c.switch :s
-
   c.desc 'The subuser\'s new username'
   c.default_value 'default'
   c.arg_name 'username'
@@ -144,7 +141,6 @@ end
 
 desc 'Retrieve Subusers'
 command :profile_get do |c|
-  c.switch :s
 
   c.desc 'Search filter, subuser that is registered under you'
   c.arg_name 'username'
