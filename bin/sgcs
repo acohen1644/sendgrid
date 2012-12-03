@@ -472,27 +472,28 @@ end
 
 
 desc 'Update Subuser Password'
-arg_name 'Describe arguments to password here'
+arg_name 'username password'
 command :password do |c|
-  c.desc 'Describe a switch to password'
-  c.switch :s
-
-  c.desc 'Subuser that is registered under you'
-  c.arg_name 'username'
-  c.flag [:u, :user]
-
-  c.desc 'New password of subuser'
-  c.arg_name 'password'
-  c.flag [:p, :password]
 
   c.action do |global_options,options,args|
+    if args.empty?
+      raise "The 'username' argument is required, and it must match" <<
+            " the 'username' value from a previous successful call" <<
+            " to 'add'."
+    end
+
+    if (args.length < 2)
+      raise "The 'password' argument is required, and it will be used as" <<
+            " the specified user's new password."
+    end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
+
     begin
       response = sg.customer_password(
-        user:             options[:user],
-        password:         options[:password],
-        confirm_password: options[:password]);
+        user:             args[0],
+        password:         args[1],
+        confirm_password: args[1]);
     rescue SGerror => sge
       puts "Error:"
 
