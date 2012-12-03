@@ -245,7 +245,7 @@ command :event_url_get do |c|
     end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
-#    begin
+
     response = sg.customer_event_url_get(
       user: args[0]);
 
@@ -277,7 +277,7 @@ command :event_url_set do |c|
     end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
-#    begin
+
     response = sg.customer_event_url_set(
       user: args[0],
       url:  args[1]);
@@ -301,7 +301,7 @@ command :event_url_delete do |c|
     end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
-#    begin
+
     response = sg.customer_event_url_delete(
       user: args[0]);
 
@@ -323,7 +323,7 @@ command :disable do |c|
     end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
-#    begin
+
     response = sg.customer_disable(
       user: args[0]);
 
@@ -345,7 +345,7 @@ command :website_enable do |c|
     end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
-#    begin
+
     response = sg.customer_website_enable(
       user: args[0]);
 
@@ -367,7 +367,7 @@ command :website_disable do |c|
     end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
-#    begin
+
     response = sg.customer_website_disable(
       user: args[0]);
 
@@ -584,42 +584,6 @@ end
 
 
 
-#desc 'Describe command1 here'
-#arg_name 'Describe arguments to command1 here'
-#command :command1 do |c|
-#  c.desc 'Describe a switch to command1'
-#  c.switch :s
-#
-#  c.desc 'Describe a flag to command1'
-#  c.default_value 'default'
-#  c.flag :f
-#
-#  c.action do |global_options,options,args|
-#
-#    # Your command logic here
-#     
-#    # If you have any errors, just raise them
-#    # raise "that command made no sense"
-#
-#    puts "command1 command ran"
-#  end
-#end
-#
-#desc 'Describe command2 here'
-#arg_name 'Describe arguments to command2 here'
-#command :command2 do |c|
-#  c.action do |global_options,options,args|
-#    puts "command2 command ran"
-#  end
-#end
-#
-#desc 'Describe command3 here'
-#arg_name 'Describe arguments to command3 here'
-#command :command3 do |c|
-#  c.action do |global_options,options,args|
-#    puts "command3 command ran"
-#  end
-#end
 #
 #pre do |global,command,options,args|
 #  # Pre logic here
