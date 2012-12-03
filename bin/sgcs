@@ -68,6 +68,11 @@ command :add do |c|
   c.arg_name 'address'
   c.flag [:a, :address]
 
+  c.desc 'Address line 2 of new subuser'
+  c.default_value 'default'
+  c.arg_name 'address2'
+  c.flag [:b, :address2]
+
   c.desc 'City of new subuser'
   c.default_value 'default'
   c.arg_name 'city'
@@ -98,11 +103,6 @@ command :add do |c|
   c.arg_name 'website'
   c.flag [:w, :website]
 
-  c.desc 'Company of new subuser'
-  c.default_value 'default'
-  c.arg_name 'company'
-  c.flag [:m, :company]
-
   c.desc 'Mail domain of new subuser'
   c.arg_name 'mail_domain'
   c.flag [:d, :mail_domain]
@@ -119,13 +119,13 @@ command :add do |c|
         first_name:       options[:first_name],
         last_name:        options[:last_name],
         address:          options[:address],
+        address2:         options[:address2],
         city:             options[:city],
         state:            options[:state],
         zip:              options[:zip],
         country:          options[:country],
         phone:            options[:phone],
-        website:          options[:website],
-        company:          options[:company]);
+        website:          options[:website]);
     rescue SGerror => sge
       puts "Error:"
 
@@ -170,6 +170,10 @@ command :profile_get do |c|
   c.arg_name 'address'
   c.flag [:a, :address]
 
+  c.desc 'Search filter, address line 2 of subuser'
+  c.arg_name 'address2'
+  c.flag [:b, :address2]
+
   c.desc 'Search filter, city of subuser'
   c.arg_name 'city'
   c.flag [:c, :city]
@@ -194,10 +198,6 @@ command :profile_get do |c|
   c.arg_name 'website'
   c.flag [:w, :website]
 
-  c.desc 'Search filter, company of subuser'
-  c.arg_name 'company'
-  c.flag [:m, :company]
-
   c.action do |global_options,options,args|
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
@@ -209,13 +209,13 @@ command :profile_get do |c|
         first_name:       options[:first_name],
         last_name:        options[:last_name],
         address:          options[:address],
+        address2:         options[:address2],
         city:             options[:city],
         state:            options[:state],
         zip:              options[:zip],
         country:          options[:country],
         phone:            options[:phone],
-        website:          options[:website],
-        company:          options[:company]);
+        website:          options[:website]);
 
       # customer_profile_get() returns an array of Hashes, each of which
       # decsribes a single customer.
@@ -383,73 +383,82 @@ end
 
 
 desc 'Update Subuser'
-arg_name 'Describe arguments to profile_set here'
+arg_name 'username'
 command :profile_set do |c|
-  c.desc 'Describe a switch to profile_get'
-  c.switch :s
-
-  c.desc 'Subuser that is registered under you'
-  c.arg_name 'username'
-  c.flag [:u, :username]
 
   c.desc 'First name of subuser'
   c.arg_name 'first_name'
+  c.default_value 'no_first_name'
   c.flag [:f, :first_name]
 
   c.desc 'Last name of subuser'
   c.arg_name 'last_name'
+  c.default_value 'no_last_name'
   c.flag [:l, :last_name]
 
   c.desc 'Address of subuser'
   c.arg_name 'address'
+  c.default_value 'no_address'
   c.flag [:a, :address]
+
+  c.desc 'Address line 2 of subuser'
+  c.arg_name 'address2'
+  c.default_value 'no_address2'
+  c.flag [:b, :address2]
 
   c.desc 'City of subuser'
   c.arg_name 'city'
+  c.default_value 'no_city'
   c.flag [:c, :city]
 
   c.desc 'State of subuser'
   c.arg_name 'state'
+  c.default_value 'no_state'
   c.flag [:t, :state]
 
   c.desc 'Zipcode of subuser'
   c.arg_name 'zip'
+  c.default_value 'no_zip'
   c.flag [:z, :zip]
 
   c.desc 'Country of subuser'
   c.arg_name 'country'
+  c.default_value 'no_country'
   c.flag [:o, :country]
 
   c.desc 'Phone number of subuser'
   c.arg_name 'phone'
+  c.default_value 'no_phone'
   c.flag [:h, :phone]
 
   c.desc 'Website of subuser'
   c.arg_name 'website'
+  c.default_value 'no_website'
   c.flag [:w, :website]
 
-  c.desc 'Company of subuser'
-  c.arg_name 'company'
-  c.flag [:m, :company]
-
   c.action do |global_options,options,args|
+    if args.empty?
+      raise "The 'username' argument is required, and it must match" <<
+            " the 'username' value from a previous successful call" <<
+            " to 'add'."
+    end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
     begin
       response = sg.customer_profile_set(
-        username:         options[:username],
+        user:             args[0],
         email:            options[:email],
         active:           options[:active],
         first_name:       options[:first_name],
         last_name:        options[:last_name],
         address:          options[:address],
+        address2:         options[:address2],
         city:             options[:city],
         state:            options[:state],
         zip:              options[:zip],
         country:          options[:country],
         phone:            options[:phone],
-        website:          options[:website],
-        company:          options[:company]);
+        website:          options[:website]);
     rescue SGerror => sge
       puts "Error:"
 
