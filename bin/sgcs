@@ -548,26 +548,26 @@ end
 
 
 desc 'Update Subuser Email Address'
-arg_name 'Describe arguments to email here'
+arg_name 'username new_email_address'
 command :email do |c|
-  c.desc 'Describe a switch to email'
-  c.switch :s
-
-  c.desc 'Subuser that is registered under you'
-  c.arg_name 'user'
-  c.flag [:u, :user]
-
-  c.desc 'New email address of subuser'
-  c.arg_name 'email'
-  c.flag [:e, :email]
 
   c.action do |global_options,options,args|
+    if args.empty?
+      raise "The 'username' argument is required, and it must match" <<
+            " the 'username' value from a previous successful call" <<
+            " to 'add'."
+    end
+
+    if (args.length < 2)
+      raise "The 'new_email_address' argument is required, and it will be" <<
+            " used as the specified user's new email address."
+    end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
     begin
       response = sg.customer_email(
-        user:             options[:user],
-        email:            options[:email]);
+        user:             args[0],
+        email:            args[1]);
     rescue SGerror => sge
       puts "Error:"
 
