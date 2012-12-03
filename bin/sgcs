@@ -511,26 +511,26 @@ end
 
 
 desc 'Update Subuser Username'
-arg_name 'Describe arguments to username here'
+arg_name 'old_username new_username'
 command :username do |c|
-  c.desc 'Describe a switch to username'
-  c.switch :s
-
-  c.desc 'Subuser that is registered under you'
-  c.arg_name 'old_username'
-  c.flag [:o, :old_username]
-
-  c.desc 'New username of subuser'
-  c.arg_name 'new_username'
-  c.flag [:n, :new_username]
 
   c.action do |global_options,options,args|
+    if args.empty?
+      raise "The 'old_username' argument is required, and it must match" <<
+            " the 'username' value from a previous successful call" <<
+            " to 'add'."
+    end
+
+    if (args.length < 2)
+      raise "The 'new_username' argument is required, and it will be" <<
+            " used as the specified user's new password."
+    end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
     begin
       response = sg.customer_username(
-        user:             options[:old_username],
-        username:         options[:new_username]);
+        user:             args[0],
+        username:         args[1]);
     rescue SGerror => sge
       puts "Error:"
 
