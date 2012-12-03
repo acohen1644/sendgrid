@@ -472,7 +472,7 @@ end
 
 
 desc 'Update Subuser Password'
-arg_name 'username password'
+arg_name 'username new_password'
 command :password do |c|
 
   c.action do |global_options,options,args|
@@ -483,8 +483,8 @@ command :password do |c|
     end
 
     if (args.length < 2)
-      raise "The 'password' argument is required, and it will be used as" <<
-            " the specified user's new password."
+      raise "The 'new_password' argument is required, and it will" <<
+            " be used as the specified user's new password."
     end
 
     sg = Sg.new(global_options[:api_user], global_options[:api_password]);
