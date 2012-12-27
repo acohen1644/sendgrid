@@ -215,6 +215,8 @@ class Sg
           validate_max_length(name, value, MAX_LASTNAME_LEN);
         when :address
           validate_max_length(name, value, MAX_ADDRESS_LEN);
+        when :address2
+          validate_max_length(name, value, MAX_ADDRESS_LEN);
         when :city
           validate_max_length(name, value, MAX_CITY_LEN);
         when :state
