@@ -124,12 +124,12 @@ command :add do |c|
         phone:            options[:phone],
         website:          options[:website]);
     rescue SGerror => sge
-      puts "Error:"
+      STDERR.puts "Error:"
 
       if (sge.messages.respond_to?(:each))
-        sge.messages.each {|msg| puts msg}
+        sge.messages.each {|msg| STDERR.puts msg}
       else
-        puts sge.messages;
+        STDERR.puts sge.messages;
       end
     end
 
@@ -456,12 +456,12 @@ command :profile_set do |c|
         phone:            options[:phone],
         website:          options[:website]);
     rescue SGerror => sge
-      puts "Error:"
+      STDERR.puts "Error:"
 
       if (sge.messages.respond_to?(:each))
-        sge.messages.each {|msg| puts msg}
+        sge.messages.each {|msg| STDERR.puts msg}
       else
-        puts sge.messages;
+        STDERR.puts sge.messages;
       end
     end
 
@@ -495,12 +495,12 @@ command :password do |c|
         password:         args[1],
         confirm_password: args[1]);
     rescue SGerror => sge
-      puts "Error:"
+      STDERR.puts "Error:"
 
       if (sge.messages.respond_to?(:each))
-        sge.messages.each {|msg| puts msg}
+        sge.messages.each {|msg| STDERR.puts msg}
       else
-        puts sge.messages;
+        STDERR.puts sge.messages;
       end
     end
 
@@ -532,12 +532,12 @@ command :username do |c|
         user:             args[0],
         username:         args[1]);
     rescue SGerror => sge
-      puts "Error:"
+      STDERR.puts "Error:"
 
       if (sge.messages.respond_to?(:each))
-        sge.messages.each {|msg| puts msg}
+        sge.messages.each {|msg| STDERR.puts msg}
       else
-        puts sge.messages;
+        STDERR.puts sge.messages;
       end
     end
 
@@ -569,12 +569,12 @@ command :email do |c|
         user:             args[0],
         email:            args[1]);
     rescue SGerror => sge
-      puts "Error:"
+      STDERR.puts "Error:"
 
       if (sge.messages.respond_to?(:each))
-        sge.messages.each {|msg| puts msg}
+        sge.messages.each {|msg| STDERR.puts msg}
       else
-        puts sge.messages;
+        STDERR.puts sge.messages;
       end
     end
 
