@@ -1,0 +1,28 @@
+sgcs(1) -- Interactively exercise the SendGrid customer-subuser API
+===================================================================
+
+
+## SYNOPSIS
+
+`sgcs` `-u sendgrid_account_username` `-p sendgrid_account_password`
+
+## DESCRIPTION
+
+## OPTIONS
+
+## EXAMPLES
+
+## FILES
+
+## ENVIRONMENT
+
+## BUGS
+
+## LICENSE
+
+## AUTHOR
+
+## COPYRIGHT
+
+## SEE ALSO
+
